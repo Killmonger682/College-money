@@ -1,17 +1,26 @@
 const maxBudget = 10000000;
 let currentSpending = 0;
 
-function addSpending() {
+function updateSpending() {
     const amount = parseFloat(document.getElementById('amount').value);
-    if (isNaN(amount) || amount <= 0) {
+    if (isNaN(amount)) {
         alert('Please enter a valid amount');
         return;
     }
-    if (currentSpending + amount > maxBudget) {
+    currentSpending += amount;
+
+    // Ensure current spending does not exceed the maximum budget
+    if (currentSpending > maxBudget) {
         alert('Warning: Spending exceeds budget!');
+        currentSpending -= amount;
         return;
     }
-    currentSpending += amount;
+
+    // Ensure current spending does not go below zero
+    if (currentSpending < 0) {
+        currentSpending = 0;
+    }
+
     displayStatus();
 }
 
