@@ -1,1 +1,1 @@
-# College-money
+# College Money
