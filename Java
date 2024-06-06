@@ -1,0 +1,28 @@
+const maxBudget = 10000000;
+let currentSpending = 0;
+
+function addSpending() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount');
+        return;
+    }
+    if (currentSpending + amount > maxBudget) {
+        alert('Warning: Spending exceeds budget!');
+        return;
+    }
+    currentSpending += amount;
+    displayStatus();
+}
+
+function getPercentageSpent() {
+    return (currentSpending / maxBudget) * 100;
+}
+
+function displayStatus() {
+    const percentageSpent = getPercentageSpent();
+    document.getElementById('status').innerHTML = `
+        <p>Current Spending: ₹${currentSpending}</p>
+        <p>Budget Used: ${percentageSpent.toFixed(2)}% of ₹${maxBudget}</p>
+    `;
+}
